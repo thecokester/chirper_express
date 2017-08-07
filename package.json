@@ -1,11 +1,25 @@
 {
   "name": "chirper_express",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thecokester/chirper_express.git"
+  },
+  "bugs": {
+    "url": "https://github.com/thecokester/chirper_express/issues"
+  },
+  "homepage": "https://github.com/thecokester/chirper_express#readme",
+  "dependencies": {
+    "body-parser": "latest",
+    "express": "latest",
+    "shortid": "^2.2.8"
+  },
+  "devDependencies": {},
+  "description": ""
 }
