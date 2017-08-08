@@ -8,7 +8,7 @@ var bodyparser = require("body-parser")
 app.use(bodyparser.json())
 
 app.get('/chirps', function (req, res) {
-    console.log('Markus')
+    console.log('Get Markus')
    
    
      fs.readFile(jsonPath, function(err, file) {
@@ -23,7 +23,7 @@ app.get('/chirps', function (req, res) {
 });
 
 app.post('/chirps', function (req, res) {
-    console.log('Markus')
+    console.log(' Post Markus')
      var chunks = '',
             data;
 
@@ -65,7 +65,7 @@ app.post('/chirps', function (req, res) {
 
 
 app.put('/chirps/one/:id', function (req, res) {
-    console.log('Markus')
+    console.log('Put Markus')
    
        fs.readFile(jsonPath, 'utf-8', function(err, file) {
            if (err) {
@@ -96,9 +96,10 @@ app.put('/chirps/one/:id', function (req, res) {
        });
    })
     
-app.delete('/chirps/one/id', function (req, res) {
-    
-        fs.readFile(jsonPath, 'utf-8', function(err, fileContents) {
+app.delete('/chirps/one/:id', function (req, res) {
+    console.log('Delete Markus')
+   
+    fs.readFile(jsonPath, 'utf-8', function(err, fileContents) {
             if (err) {
                 res.sendStatus(500);
             } else {
