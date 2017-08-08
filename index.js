@@ -96,38 +96,36 @@ app.put('/chirps/one/:id', function (req, res) {
        });
    })
     
-app.delete('/chirps/one/', function (req, res) {
-    console.log('Markus')
-
-    fs.readFile(jsonPath, 'utf-8', function(err, file) {
+app.delete('/chirps/one/id', function (req, res) {
+    
+        fs.readFile(jsonPath, 'utf-8', function(err, fileContents) {
             if (err) {
-                res.writeHead(500);
-                res.end('Could not read file');
-            }
-
-            var arr = JSON.parse(file);
-            var id = req.params.id;
-            var deleteIndex = -1;
-            
-            arr.forEach(function(a, i) {
-                if (a.id === id) {
-                    deleteIndex = i;
-                }
-            });
-            if (deleteIndex != -1) {
-                    arr.splice(deleteIndex, 1);
-            }
-            fs.writeFile(jsonPath, JSON.stringify(arr), function(err, success) {
-                if (err) {
-                    res.writeHead(500);
-                    res.end('Couldn\'t successfull store data');
+                res.sendStatus(500);
+            } else {
+                var chunks = JSON.parse(fileContents);
+                var id = req.params.id;
+                var deleteIndex = -1;
+                chunks.forEach(function(chunk, i) {
+                    if (chunk.id === id) {
+                        deleteIndex = i;
+                    }
+                });
+                if (deleteIndex != -1) {
+                    chunks.splice(deleteIndex, 1);
+                    fs.writeFile(jsonPath, JSON.stringify(chunks), function(err, success) {
+                        if (err) {
+                            res.sendStatus(500);
+                        } else {
+                            res.sendStatus(202);
+                        }
+                    });
                 } else {
-                    res.writeHead(201, 'Created');
-                    res.end(JSON.stringify(arr));
+                    res.sendStatus(404);
                 }
-            });
+            }
         });
-});
+    });
+
   
 // //    fs.readFile( __dirname + "/" + "users.json", 'utf8', function (err, data) {
 // //       var users = JSON.parse( data );
